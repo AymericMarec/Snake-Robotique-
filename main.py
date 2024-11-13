@@ -3,9 +3,9 @@ import time
 import machine
 from random import randint
 import snake
-import button
 
 def CountDown(np,Board):
+    # oui je fais nettoyer cette fonction t'inquetes
     Color = (10,0,0)
     clear_all()
     np[Board[0][3]] = Color
@@ -111,14 +111,9 @@ def Menu():
     print(" - Bouton 2 : Bas\n")
     print(" - Bouton 3 : Gauche\n")
     print(" - Bouton 4 : Droite\n")
-    print("------------------------\n\n")
-    print("   Choisis ta difficulté : \n\n")
-    print(" - Bouton 1 : Facile\n")
-    print(" - Bouton 2 : Intermediaire\n")
-    print(" - Bouton 3 : Difficile\n")
 
 
-def Game(np,Board,Timer):
+def Game(np,Board):
     Points = 0
     global TheSnake
     TheSnake = snake.Snake(3,3)
@@ -126,7 +121,7 @@ def Game(np,Board,Timer):
     while True:
         err = TheSnake.MoveSnake(Apple)
         if err != None :
-            print(f"Tu as perdu avec : {Points}")
+            print(f"Tu as perdu avec : {Points} points")
             return
         np = TheSnake.DisplaySnake(np,Board)
         if Apple in TheSnake.Body:
@@ -139,25 +134,25 @@ def Game(np,Board,Timer):
         time.sleep(0.5)
         clear_all() 
 
-# LED_PIN = 1
-# BUTTON_UP_PIN = 20
-# BUTTON_RIGHT_PIN = 19
-# BUTTON_DOWN_PIN = 21
-# BUTTON_LEFT_PIN = 18
-# NB_LED = 64
+LED_PIN = 1
+BUTTON_UP_PIN = 20
+BUTTON_RIGHT_PIN = 19
+BUTTON_DOWN_PIN = 21
+BUTTON_LEFT_PIN = 18
+NB_LED = 64
 
-# np = neopixel.NeoPixel(machine.Pin(LED_PIN), NB_LED)
-# buttonup = machine.Pin(BUTTON_UP_PIN, mode=machine.Pin.IN, pull=machine.Pin.PULL_DOWN)
-# buttondown = machine.Pin(BUTTON_DOWN_PIN, mode=machine.Pin.IN, pull=machine.Pin.PULL_DOWN)
-# buttonleft = machine.Pin(BUTTON_LEFT_PIN , mode=machine.Pin.IN, pull=machine.Pin.PULL_DOWN)
-# buttonright = machine.Pin(BUTTON_RIGHT_PIN, mode=machine.Pin.IN, pull=machine.Pin.PULL_DOWN)
+np = neopixel.NeoPixel(machine.Pin(LED_PIN), NB_LED)
+buttonup = machine.Pin(BUTTON_UP_PIN, mode=machine.Pin.IN, pull=machine.Pin.PULL_DOWN)
+buttondown = machine.Pin(BUTTON_DOWN_PIN, mode=machine.Pin.IN, pull=machine.Pin.PULL_DOWN)
+buttonleft = machine.Pin(BUTTON_LEFT_PIN , mode=machine.Pin.IN, pull=machine.Pin.PULL_DOWN)
+buttonright = machine.Pin(BUTTON_RIGHT_PIN, mode=machine.Pin.IN, pull=machine.Pin.PULL_DOWN)
 
-# buttonup.irq(trigger = machine.Pin.IRQ_FALLING, handler = ChangeDirection)
-# buttondown.irq(trigger = machine.Pin.IRQ_FALLING, handler = ChangeDirection)
-# buttonleft.irq(trigger = machine.Pin.IRQ_FALLING, handler = ChangeDirection)
-# buttonright.irq(trigger = machine.Pin.IRQ_FALLING, handler = ChangeDirection)
+buttonup.irq(trigger = machine.Pin.IRQ_FALLING, handler = ChangeDirection)
+buttondown.irq(trigger = machine.Pin.IRQ_FALLING, handler = ChangeDirection)
+buttonleft.irq(trigger = machine.Pin.IRQ_FALLING, handler = ChangeDirection)
+buttonright.irq(trigger = machine.Pin.IRQ_FALLING, handler = ChangeDirection)
 
-Board = InitTab(button.NB_LED)
+Board = InitTab(NB_LED)
 Menu()
-CountDown(button.np,Board)
-Game(button.np,Board)
+CountDown(np,Board)
+Game(np,Board)
