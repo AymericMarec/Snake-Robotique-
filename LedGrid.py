@@ -34,107 +34,53 @@ class LedGrid:
     def TabNB(self,nb):
         if(nb == 3):
             return[
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"]
             ] 
         elif(nb == 2):
             return[
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"]
             ] 
         elif(nb == 1):
             return[
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []
-            ]
-
-    def CountDown(self):
-        # oui je fais nettoyer cette fonction t'inquetes
-        Color = (10,0,0)
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"],
+            ["0","0","0","0","0","0","0","0"]
+            ] 
+    def DrawNB(self,tab,Color):
         self.clear_all()
-        TabNB = self.TabNB(3)
-        for row in range(0,len(TabNB)):
-            for led in range(0,len(TabNB[row])):
+        for row in range(0,len(tab)):
+            for led in range(0,len(tab[row])):
                 if(led == "1"):
-                    self.Paint(row,led,(10,0,0))
+                    self.Paint(row,led,Color)
         self.Refresh()
-
-
-                    
-        # np[Board[0][3]] = Color
-        # np[Board[0][4]] = Color
-        # np[Board[0][5]] = Color
-        # np[Board[1][2]] = Color
-        # np[Board[2][2]] = Color
-        # np[Board[3][3]] = Color
-        # np[Board[3][4]] = Color
-        # np[Board[3][5]] = Color
-        # np[Board[4][2]] = Color
-        # np[Board[5][2]] = Color
-        # np[Board[6][3]] = Color
-        # np[Board[6][4]] = Color
-        # np[Board[6][5]] = Color
+    def CountDown(self):
+        Color = (10,0,0)
+        TabNB = self.TabNB(3)
+        self.DrawNB(TabNB,Color)
         time.sleep(1)
-        self.clear_all()
         TabNB = self.TabNB(2)
-        for row in range(0,len(TabNB)):
-            for led in range(0,len(TabNB[row])):
-                if(led == "1"):
-                    self.Paint(row,led,(10,0,0))
-        # np[Board[0][2]] = Color
-        # np[Board[0][3]] = Color
-        # np[Board[0][4]] = Color
-        # np[Board[0][5]] = Color
-        # np[Board[1][2]] = Color
-        # np[Board[2][2]] = Color
-        # np[Board[2][3]] = Color
-        # np[Board[3][4]] = Color
-        # np[Board[3][5]] = Color
-        # np[Board[4][6]] = Color
-        # np[Board[5][6]] = Color
-        # np[Board[6][2]] = Color
-        # np[Board[6][3]] = Color
-        # np[Board[6][4]] = Color
-        # np[Board[6][5]] = Color
-        # np[Board[0][6]] = Color
+        self.DrawNB(TabNB,Color)
         time.sleep(1)
-        self.clear_all()
-        TabNB = self.TabNB(1)
-        for row in range(0,len(TabNB)):
-            for led in range(0,len(TabNB[row])):
-                if(led == "1"):
-                    self.Paint(row,led,(10,0,0))
-        # np[Board[1][3]] = Color
-        # np[Board[2][3]] = Color
-        # np[Board[3][3]] = Color
-        # np[Board[4][3]] = Color
-        # np[Board[5][3]] = Color
-        # np[Board[6][3]] = Color
-        # np[Board[1][4]] = Color
-        # np[Board[2][4]] = Color
-        # np[Board[3][4]] = Color
-        # np[Board[4][4]] = Color
-        # np[Board[5][4]] = Color
-        # np[Board[6][4]] = Color
+        TabNB = self.TabNB()
+        self.DrawNB(TabNB,Color)
         time.sleep(1)
-
-        self.clear_all()
 
