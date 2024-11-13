@@ -3,17 +3,14 @@ class Snake:
         self.Body = [[x,y-2],[x,y-1],[x,y]]
         self.CuurentDirection = "RIGHT"
         self.NextDirection = "RIGHT"
-        self.ToClear = []
 
-    def DisplaySnake(self,np,Board):
-        for pixel in self.ToClear:
-            np[Board[pixel[0]][pixel[1]]] = (0,0,0)
+    def DisplaySnake(self,Board):
         for i in range(0,len(self.Body)) :
             if(i == len(self.Body)-1):
-                np[Board[self.Body[i][0]][self.Body[i][1]]] = (3,3,10) 
+                Board.Paint(self.Body[i][0],self.Body[i][1],(3,3,10) )
             else :
-                np[Board[self.Body[i][0]][self.Body[i][1]]] = (0,0,10) 
-        return np
+                Board.Paint(self.Body[i][0],self.Body[i][1],(0,0,10) )
+        return Board
     def MoveSnake(self,Apple):
         NewHead = [self.Body[len(self.Body)-1][0],self.Body[len(self.Body)-1][1]] 
         self.CuurentDirection = self.NextDirection
@@ -27,7 +24,7 @@ class Snake:
             NewHead[1]-=1
         if(NewHead[0] < 0 or NewHead[0] >= 8 or NewHead[1] < 0 or NewHead[1] >= 8 or NewHead in self.Body):
             return "error"
-        if(Apple != NewHead):
+        if([Apple.x,Apple.y] != NewHead):
             self.Body.pop(0)
         self.Body.append(NewHead)
         return None
