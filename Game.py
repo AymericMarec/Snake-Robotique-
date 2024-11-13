@@ -15,46 +15,31 @@ class Game:
         self.buttonRIGHT = Button(19,self.ChangeDirection)
         self.buttonDOWN = Button(21,self.ChangeDirection)
         self.buttonLEFT = Button(18,self.ChangeDirection)
-        self.Menu()
         self.StartGame()
 
     def ChangeDirection(self,pin):
-        if pin == self.buttonUP and self.snake.CuurentDirection!= "DOWN":
+        if pin == self.buttonUP.button and self.snake.CurentDirection!= "DOWN":
             self.snake.NextDirection = "UP"
-        elif pin == self.buttonRIGHT and self.snake.CuurentDirection!= "LEFT":
+        elif pin == self.buttonRIGHT.button and self.snake.CurentDirection!= "LEFT":
             self.snake.NextDirection = "RIGHT"
-        elif pin == self.buttonDOWN and self.snake.CuurentDirection!= "UP":
+        elif pin == self.buttonDOWN.button and self.snake.CurentDirection!= "UP":
             self.snake.NextDirection = "DOWN"
-        elif pin == self.buttonLEFT and self.snake.CuurentDirection!= "RIGHT":
+        elif pin == self.buttonLEFT.button and self.snake.CurentDirection!= "RIGHT":
             self.snake.NextDirection = "LEFT"
-    def SpawnApple(self):
-        AppleX = randint(0,7)
-        AppleY = randint(0,7)
-        while [AppleX,AppleY] in self.Snake.Body:
-            AppleX = randint(0,7)
-            AppleY = randint(0,7)
-        return [AppleX,AppleY]
-    def Menu(self):
-        print("------------------------\n\n")
-        print("     Touches :\n")
-        print(" - Bouton 1 : Haut\n")
-        print(" - Bouton 2 : Bas\n")
-        print(" - Bouton 3 : Gauche\n")
-        print(" - Bouton 4 : Droite\n")
 
     def StartGame(self):
         while True:
             err = self.snake.MoveSnake(self.apple)
-            if err != None :
+            if err != None :    #   Si le joueur perd
                 print(f"Tu as perdu avec : {self.Points} points")
                 return
             self.LedGrid = self.snake.DisplaySnake(self.LedGrid)
-            if Apple in self.snake.Body:
+            if [self.apple.x,self.apple.y] in self.snake.Body:  #   Si le joueur mange une pomme
                 Points+=1
                 print(f"Points : {Points}")
                 self.apple.SpawnApple(self.snake)
 
-            self.LedGrid.Paint(self.apple.x,self.apple.y,(0,10,0))
+            self.LedGrid.Paint(self.apple.x,self.apple.y,(0,10,0))  #   On affiche la pomme
             self.LedGrid.Refresh()
             sleep(0.5)
             self.LedGrid.clear_all()

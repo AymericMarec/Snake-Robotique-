@@ -9,6 +9,6 @@ class Apple:
     def SpawnApple(self,Snake):
         self.x = randint(0,7)
         self.y = randint(0,7)
-        while [self.x,self.y] in Snake.Body:
+        while [self.x,self.y] in Snake.Body:    #   Pour eviter qu'une pomme apparaisse dans un serpent
             self.x = randint(0,7)
             self.y = randint(0,7)

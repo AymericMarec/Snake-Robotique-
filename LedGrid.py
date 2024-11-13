@@ -9,6 +9,10 @@ class LedGrid:
         self.np = neopixel.NeoPixel(machine.Pin(self.LED_PIN), self.NB_LED)
         self.LEDGrid = self.InitTab()
 
+
+    #On créer un tableau qui comporte les nombres de 0 a 63 pour notre matrice de led
+    #Puis on la transforme ce tableau en matrice de 8x8 et inversant une ligne sur 2
+    #Pour avoir accès a une led precise grace a des coordonnées 
     def InitTab(self):
         leds = []
         for i in range (0,self.NB_LED):
@@ -20,17 +24,18 @@ class LedGrid:
                 row.reverse()
             BetterLED.append(row)
         return BetterLED
-            
+    #Eteindre toute les leds de la matrice  
     def clear_all(self) :
-        for i in range(0,self.NB_LED):
-            self.np[i] =(0,0,0)
+        for led in range(0,self.NB_LED):
+            self.np[led] =(0,0,0)
         self.np.write()
-
+    #Allumer une led precisemment avec une couleur
     def Paint(self,x,y,Color):
         self.np[self.LEDGrid[x][y]] = Color
-        
+     
     def Refresh(self):
         self.np.write()
+    #Renvoie une matrice representant la matrice de led avec des "1" pour representer des leds a allumer
     def TabNB(self,nb):
         if(nb == 3):
             return[
@@ -65,22 +70,19 @@ class LedGrid:
             ["0","0","0","0","0","0","0","0"],
             ["0","0","0","0","0","0","0","0"]
             ] 
-    def DrawNB(self,tab,Color):
+    #On Dessine le Nombre qu'on recupere depuis notre matrice
+    def DrawNB(self,tabNB,Color):
         self.clear_all()
-        for row in range(0,len(tab)):
-            for led in range(0,len(tab[row])):
+        for row in range(0,len(tabNB)):
+            for led in range(0,len(tabNB[row])):
                 if(led == "1"):
                     self.Paint(row,led,Color)
         self.Refresh()
+    #On affiche un compteur avant de démarrer la partie
     def CountDown(self):
         Color = (10,0,0)
-        TabNB = self.TabNB(3)
-        self.DrawNB(TabNB,Color)
-        time.sleep(1)
-        TabNB = self.TabNB(2)
-        self.DrawNB(TabNB,Color)
-        time.sleep(1)
-        TabNB = self.TabNB()
-        self.DrawNB(TabNB,Color)
-        time.sleep(1)
+        for CountDown in range(3,0,-1): #   Une boucle ou CountDown prends les valeurs 3,2,1
+            TabNB = self.TabNB(CountDown)
+            self.DrawNB(TabNB,Color)
+            time.sleep(1)
 
