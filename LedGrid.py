@@ -1,14 +1,13 @@
-import neopixel
-import machine
-import time
+from neopixel import NeoPixel
+from machine import Pin
+from time import sleep
 
 class LedGrid:
     def __init__(self,LED_PIN,NB_LED):
         self.LED_PIN = LED_PIN
         self.NB_LED = NB_LED
-        self.np = neopixel.NeoPixel(machine.Pin(self.LED_PIN), self.NB_LED)
+        self.np = NeoPixel(Pin(self.LED_PIN), self.NB_LED)
         self.LEDGrid = self.InitTab()
-
 
     #On créer un tableau qui comporte les nombres de 0 a 63 pour notre matrice de led
     #Puis on la transforme ce tableau en matrice de 8x8 et inversant une ligne sur 2
@@ -70,8 +69,8 @@ class LedGrid:
             ["0","0","0","0","0","0","0","0"],
             ["0","0","0","0","0","0","0","0"]
             ] 
-    #On Dessine le Nombre qu'on recupere depuis notre matrice
-    def DrawNB(self,tabNB,Color):
+    #On Dessine la matrice qu'on a recu
+    def DrawTab(self,tabNB,Color):
         self.clear_all()
         for row in range(0,len(tabNB)):
             for led in range(0,len(tabNB[row])):
@@ -83,6 +82,6 @@ class LedGrid:
         Color = (10,0,0)
         for CountDown in range(3,0,-1): #   Une boucle ou CountDown prends les valeurs 3,2,1
             TabNB = self.TabNB(CountDown)
-            self.DrawNB(TabNB,Color)
-            time.sleep(1)
+            self.DrawTab(TabNB,Color)
+            sleep(1)
 

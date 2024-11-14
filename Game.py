@@ -18,14 +18,14 @@ class Game:
         self.StartGame()
 
     def ChangeDirection(self,pin):
-        if pin == self.buttonUP.button and self.snake.CurentDirection!= "DOWN":
-            self.snake.NextDirection = "UP"
-        elif pin == self.buttonRIGHT.button and self.snake.CurentDirection!= "LEFT":
-            self.snake.NextDirection = "RIGHT"
-        elif pin == self.buttonDOWN.button and self.snake.CurentDirection!= "UP":
-            self.snake.NextDirection = "DOWN"
-        elif pin == self.buttonLEFT.button and self.snake.CurentDirection!= "RIGHT":
-            self.snake.NextDirection = "LEFT"
+        if pin == self.buttonUP.button and self.snake.GetDirection()!= "DOWN":
+            self.snake.ChangeDirection("UP")
+        elif pin == self.buttonRIGHT.button and self.snake.GetDirection()!= "LEFT":
+            self.snake.ChangeDirection("RIGHT")
+        elif pin == self.buttonDOWN.button and self.snake.GetDirection()!= "UP":
+            self.snake.ChangeDirection("DOWN")
+        elif pin == self.buttonLEFT.button and self.snake.GetDirection()!= "RIGHT":
+            self.snake.ChangeDirection("LEFT")
 
     def StartGame(self):
         while True:

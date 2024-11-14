@@ -12,6 +12,11 @@ class Snake:
                 Board.Paint(self.Body[i][0],self.Body[i][1],(0,0,10))   #   On affiche le corps
         return Board
     
+    def ChangeDirection(self,direction):
+        self.NextDirection = direction
+    def GetDirection(self):
+        return self.CurentDirection
+
     def MoveSnake(self,Apple):
         NewHead = [self.Body[len(self.Body)-1][0],self.Body[len(self.Body)-1][1]] 
         self.CurentDirection = self.NextDirection
