@@ -14,12 +14,12 @@ class Snake:
     
     def ChangeDirection(self,direction):
         self.NextDirection = direction
+        
     def GetDirection(self):
         return self.CurentDirection
 
     def MoveSnake(self,Apple):
         NewHead = [self.Body[len(self.Body)-1][0],self.Body[len(self.Body)-1][1]] 
-        self.CurentDirection = self.NextDirection
         if self.CurentDirection == "UP":
             NewHead[0]-=1
         elif self.CurentDirection == "RIGHT":
